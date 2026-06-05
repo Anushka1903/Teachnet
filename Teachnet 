@@ -1,0 +1,280 @@
+Website Code (Try to Learn, Don't Try to Copy Please)
+Index.HTML
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TeachNet Open Faculty Network</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#directory" aria-label="TeachNet home">
+        <span class="brand-mark">TN</span>
+        <span>
+          <strong>TeachNet</strong>
+          <small>Open faculty network</small>
+        </span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="#directory">Find teachers</a>
+        <a href="#user-profiles">User profiles</a>
+        <a href="#add-profile">Add profile</a>
+        <a href="#requests">Requests</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="intro" aria-labelledby="intro-title">
+        <div class="intro-copy">
+          <p class="eyebrow">For students, teachers, professors, and mentors</p>
+          <h1 id="intro-title">Hire verified teaching professionals by subject, schedule, and experience.</h1>
+          <p>
+            Teachers can publish a profile with resume details and availability. Students can compare faculty,
+            view schedules, and send a direct hiring request.
+          </p>
+          <div class="intro-actions">
+            <a class="button primary" href="#directory">Browse teachers</a>
+            <a class="button secondary" href="#user-profiles">Create user profile</a>
+          </div>
+        </div>
+
+        <div class="network-visual" aria-label="Teaching network illustration">
+          <div class="node professor">
+            <span>Physics</span>
+            <strong>Prof. Rao</strong>
+          </div>
+          <div class="node student">
+            <span>Student</span>
+            <strong>JEE Prep</strong>
+          </div>
+          <div class="node mentor">
+            <span>Mentor</span>
+            <strong>Research</strong>
+          </div>
+          <div class="node schedule">
+            <span>Open</span>
+            <strong>Sat 10 AM</strong>
+          </div>
+          <svg viewBox="0 0 520 320" role="img" aria-hidden="true">
+            <path d="M128 92 C210 26, 308 54, 390 116" />
+            <path d="M126 94 C202 188, 304 210, 406 174" />
+            <path d="M394 116 C338 184, 254 236, 168 250" />
+            <path d="M168 250 C226 124, 286 102, 406 174" />
+          </svg>
+        </div>
+      </section>
+
+      <section class="toolbar" aria-label="Teacher search filters">
+        <div class="field search-field">
+          <label for="search">Search</label>
+          <input id="search" type="search" placeholder="Subject, name, city, exam..." />
+        </div>
+        <div class="field">
+          <label for="subjectFilter">Subject</label>
+          <select id="subjectFilter">
+            <option value="all">All subjects</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="modeFilter">Mode</label>
+          <select id="modeFilter">
+            <option value="all">Any mode</option>
+            <option value="Online">Online</option>
+            <option value="In person">In person</option>
+            <option value="Hybrid">Hybrid</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="budgetFilter">Max hourly fee</label>
+          <input id="budgetFilter" type="number" min="0" step="100" placeholder="No limit" />
+        </div>
+      </section>
+
+      <section id="directory" class="directory-shell" aria-labelledby="directory-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Open directory</p>
+            <h2 id="directory-title">Available teaching professionals</h2>
+          </div>
+          <p id="resultCount" class="result-count"></p>
+        </div>
+        <div id="teacherGrid" class="teacher-grid" aria-live="polite"></div>
+      </section>
+
+      <section id="user-profiles" class="user-profiles" aria-labelledby="user-profiles-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Student and teacher accounts</p>
+            <h2 id="user-profiles-title">Create your user profile</h2>
+          </div>
+          <button id="clearUserProfiles" class="button ghost" type="button">Clear user profiles</button>
+        </div>
+
+        <div class="profile-choice" role="radiogroup" aria-label="Choose profile type">
+          <label>
+            <input type="radio" name="profileType" value="Student" checked />
+            <span>Student profile</span>
+          </label>
+          <label>
+            <input type="radio" name="profileType" value="Teacher" />
+            <span>Teacher profile</span>
+          </label>
+        </div>
+
+        <form id="userProfileForm" class="profile-form">
+          <div class="form-grid">
+            <label>
+              Full name
+              <input name="userName" required placeholder="Enter full name" />
+            </label>
+            <label>
+              Email or phone
+              <input name="userContact" required placeholder="Email or phone number" />
+            </label>
+            <label>
+              City / location
+              <input name="userLocation" required placeholder="City" />
+            </label>
+            <label>
+              Preferred mode
+              <select name="userMode" required>
+                <option>Online</option>
+                <option>In person</option>
+                <option>Hybrid</option>
+              </select>
+            </label>
+            <label class="student-only">
+              Class / level
+              <input name="studentLevel" placeholder="Class 12, B.Tech, IELTS..." />
+            </label>
+            <label class="student-only">
+              Subject requirement
+              <input name="studentSubject" placeholder="Physics, English, coding..." />
+            </label>
+            <label class="teacher-only hidden">
+              Qualification
+              <input name="teacherQualification" placeholder="M.Sc, PhD, B.Ed..." />
+            </label>
+            <label class="teacher-only hidden">
+              Teaching subject
+              <input name="teacherSubject" placeholder="Mathematics, Chemistry..." />
+            </label>
+            <label class="wide">
+              Profile summary
+              <textarea name="userSummary" required placeholder="Tell others what you need or what you teach."></textarea>
+            </label>
+          </div>
+          <button class="button primary" type="submit">Save user profile</button>
+        </form>
+
+        <div id="userProfileList" class="user-profile-list" aria-live="polite"></div>
+      </section>
+
+      <section id="add-profile" class="profile-builder" aria-labelledby="add-profile-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">For educators</p>
+            <h2 id="add-profile-title">Add your teaching profile</h2>
+          </div>
+          <button id="resetData" class="button ghost" type="button">Reset demo data</button>
+        </div>
+
+        <form id="profileForm" class="profile-form">
+          <div class="form-grid">
+            <label>
+              Full name
+              <input name="name" required placeholder="Dr. Asha Mehta" />
+            </label>
+            <label>
+              Title
+              <input name="title" required placeholder="Assistant Professor, Mathematics" />
+            </label>
+            <label>
+              Main subject
+              <input name="subject" required placeholder="Mathematics" />
+            </label>
+            <label>
+              City / location
+              <input name="location" required placeholder="Delhi NCR" />
+            </label>
+            <label>
+              Teaching mode
+              <select name="mode" required>
+                <option>Online</option>
+                <option>In person</option>
+                <option>Hybrid</option>
+              </select>
+            </label>
+            <label>
+              Hourly fee
+              <input name="rate" required type="number" min="0" step="50" placeholder="1200" />
+            </label>
+            <label>
+              Experience
+              <input name="experience" required placeholder="8 years" />
+            </label>
+            <label>
+              Contact email
+              <input name="email" required type="email" placeholder="teacher@example.com" />
+            </label>
+            <label>
+              Resume link
+              <input name="resume" placeholder="Portfolio, LinkedIn, PDF link" />
+            </label>
+            <label>
+              Available schedule
+              <input name="schedule" required placeholder="Mon/Wed 6-8 PM; Sat 10 AM-1 PM" />
+            </label>
+            <label class="wide">
+              Short bio
+              <textarea name="bio" required placeholder="Teaching approach, qualifications, exams handled..."></textarea>
+            </label>
+            <label class="wide">
+              Skills and exam tags
+              <input name="tags" required placeholder="CBSE, IIT-JEE, Calculus, Online tutoring" />
+            </label>
+          </div>
+          <button class="button primary" type="submit">Publish profile</button>
+        </form>
+      </section>
+
+      <section id="requests" class="requests-shell" aria-labelledby="requests-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Hiring activity</p>
+            <h2 id="requests-title">Student requests</h2>
+          </div>
+          <button id="clearRequests" class="button ghost" type="button">Clear requests</button>
+        </div>
+        <div id="requestList" class="request-list"></div>
+      </section>
+    </main>
+
+    <dialog id="contactDialog">
+      <form id="contactForm" method="dialog" class="contact-form">
+        <button class="icon-button close-dialog" value="cancel" aria-label="Close contact form" type="button">x</button>
+        <p class="eyebrow">Student request</p>
+        <h2 id="dialogTeacherName">Hire teacher</h2>
+        <input type="hidden" name="teacherId" />
+        <label>
+          Student name
+          <input name="studentName" required placeholder="Your name" />
+        </label>
+        <label>
+          Contact email or phone
+          <input name="studentContact" required placeholder="Email or phone number" />
+        </label>
+        <label>
+          Requirement
+          <textarea name="requirement" required placeholder="Subject, level, preferred days, goals..."></textarea>
+        </label>
+        <button class="button primary" type="submit">Send request</button>
+      </form>
+    </dialog>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
